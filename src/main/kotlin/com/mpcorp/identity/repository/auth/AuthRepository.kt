@@ -7,5 +7,5 @@ import java.util.UUID
 
 interface AuthRepository : JpaRepository<AuthEntity, UUID>{
     @Query(value = "SELECT * FROM auth WHERE (phone = :username OR email = :username)", nativeQuery = true)
-    fun findUserByPhoneOrEmail(username: String): AuthEntity
+    fun findUserByPhoneOrEmail(username: String): AuthEntity?
 }

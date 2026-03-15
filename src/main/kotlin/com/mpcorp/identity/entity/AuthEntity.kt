@@ -17,7 +17,7 @@ data class AuthEntity (
     var phone: String,
 
     @Column(name = "password")
-    var password: String,
+    var password: String?,
 
     @Column(name = "role")
     var role: EmployeeRole = EmployeeRole.EMPLOYEE,
