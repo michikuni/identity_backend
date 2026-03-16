@@ -1,4 +1,5 @@
 package com.mpcorp.identity.common.enums
 
-class Role {
+enum class EmployeeRole {
+    EMPLOYEE, ADMIN, MANAGER, CHIEF
 }

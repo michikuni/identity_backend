@@ -1,7 +1,6 @@
 package com.mpcorp.identity.infrastructures.persistence.jpa_repository
 
-import com.mpcorp.identity.domain.entity.ProfileEntity
+import com.mpcorp.identity.infrastructures.persistence.jpa_entity.ProfileJpaEntity
 import org.springframework.data.jpa.repository.JpaRepository
-import java.util.UUID
 
-interface ProfileJpaRepository : JpaRepository<ProfileEntity, UUID>
+interface ProfileJpaRepository : JpaRepository<ProfileJpaEntity, Long>
