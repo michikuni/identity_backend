@@ -1,6 +1,5 @@
 package com.mpcorp.identity.infrastructures.persistence.jpa_repository
 
-import com.mpcorp.identity.domain.entity.AuthEntity
 import com.mpcorp.identity.infrastructures.persistence.jpa_entity.AuthJpaEntity
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Query

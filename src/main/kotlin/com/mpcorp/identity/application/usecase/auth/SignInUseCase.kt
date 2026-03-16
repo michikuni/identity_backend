@@ -5,7 +5,6 @@ import com.mpcorp.identity.common.exception.InvalidPasswordException
 import com.mpcorp.identity.common.exception.UserNotFoundException
 import com.mpcorp.identity.common.utils.JwtUtils
 import com.mpcorp.identity.domain.repository.AuthRepository
-import com.mpcorp.identity.presentation.request.SignInRequest
 import org.springframework.stereotype.Service
 
 @Service
