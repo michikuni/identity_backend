@@ -1,4 +1,4 @@
-package com.mpcorp.identity.application.dto
+package com.mpcorp.identity.application.dto.auth
 
 data class SignInCommand(
     val username: String,

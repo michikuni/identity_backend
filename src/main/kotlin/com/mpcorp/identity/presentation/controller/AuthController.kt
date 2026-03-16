@@ -1,17 +1,17 @@
 package com.mpcorp.identity.presentation.controller
 
-import com.mpcorp.identity.application.dto.SignInCommand
-import com.mpcorp.identity.application.dto.SignUpCommand
+import com.mpcorp.identity.application.dto.auth.SignInCommand
+import com.mpcorp.identity.application.dto.auth.SignUpCommand
 import com.mpcorp.identity.application.usecase.auth.SignInUseCase
 import com.mpcorp.identity.application.usecase.auth.SignUpUseCase
 import com.mpcorp.identity.common.constant.ErrorCodes
 import com.mpcorp.identity.common.constant.StatusMessage
 import com.mpcorp.identity.domain.repository.AuthRepository
 import com.mpcorp.identity.presentation.api.AuthApi
-import com.mpcorp.identity.presentation.request.SignInRequest
-import com.mpcorp.identity.presentation.request.SignUpRequest
-import com.mpcorp.identity.presentation.response.SignInResponse
-import com.mpcorp.identity.presentation.response.SignUpResponse
+import com.mpcorp.identity.presentation.request.auth.SignInRequest
+import com.mpcorp.identity.presentation.request.auth.SignUpRequest
+import com.mpcorp.identity.presentation.response.auth.SignInResponse
+import com.mpcorp.identity.presentation.response.auth.SignUpResponse
 import org.springframework.web.bind.annotation.*
 
 @RestController

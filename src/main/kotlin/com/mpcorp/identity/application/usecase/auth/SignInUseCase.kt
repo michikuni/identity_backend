@@ -1,6 +1,6 @@
 package com.mpcorp.identity.application.usecase.auth
 
-import com.mpcorp.identity.application.dto.SignInCommand
+import com.mpcorp.identity.application.dto.auth.SignInCommand
 import com.mpcorp.identity.common.exception.InvalidPasswordException
 import com.mpcorp.identity.common.exception.UserNotFoundException
 import com.mpcorp.identity.common.utils.JwtUtils

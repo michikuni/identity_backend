@@ -1,6 +1,6 @@
 package com.mpcorp.identity.application.usecase.auth
 
-import com.mpcorp.identity.application.dto.SignUpCommand
+import com.mpcorp.identity.application.dto.auth.SignUpCommand
 import com.mpcorp.identity.common.exception.UserAlreadyExistingException
 import com.mpcorp.identity.common.utils.JwtUtils
 import com.mpcorp.identity.domain.entity.AuthEntity

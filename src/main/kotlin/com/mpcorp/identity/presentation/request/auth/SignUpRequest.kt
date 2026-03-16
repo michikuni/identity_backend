@@ -1,4 +1,4 @@
-package com.mpcorp.identity.presentation.request
+package com.mpcorp.identity.presentation.request.auth
 
 data class SignUpRequest (
     val email: String,

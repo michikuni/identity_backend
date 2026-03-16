@@ -1,4 +1,4 @@
-package com.mpcorp.identity.presentation.response
+package com.mpcorp.identity.presentation.response.auth
 
 data class SignUpResponse (
     val status: Int,
