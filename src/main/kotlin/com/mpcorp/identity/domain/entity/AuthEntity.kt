@@ -1,6 +1,6 @@
 package com.mpcorp.identity.domain.entity
 
-import com.mpcorp.identity.infrastructures.persistence.jpa_entity.EmployeeRole
+import com.mpcorp.identity.common.enums.EmployeeRole
 import java.util.UUID
 
 data class AuthEntity (
