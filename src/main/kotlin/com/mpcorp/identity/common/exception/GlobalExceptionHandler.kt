@@ -1,5 +1,7 @@
 package com.mpcorp.identity.common.exception
 
+import com.mpcorp.identity.common.constant.ErrorMessage
+import com.mpcorp.identity.common.constant.StatusMessage
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 
@@ -13,8 +15,10 @@ class GlobalExceptionHandler {
     ): ErrorResponse {
 
         return ErrorResponse(
-            message = ex.message ?: "User not found",
-            status = HttpStatus.NOT_FOUND.value(),
+            message = ex.message ?: ErrorMessage.USER_NOT_FOUND,
+            code = HttpStatus.NOT_FOUND.value(),
+            status = StatusMessage.FAILURE,
+            data = HttpStatus.NOT_FOUND.reasonPhrase,
         )
     }
 
@@ -25,8 +29,22 @@ class GlobalExceptionHandler {
     ): ErrorResponse {
 
         return ErrorResponse(
-            message = ex.message ?: "Invalid password",
-            status = HttpStatus.UNAUTHORIZED.value(),
+            message = ex.message ?: ErrorMessage.INVALID_PASSWORD,
+            code = HttpStatus.UNAUTHORIZED.value(),
+            status = StatusMessage.FAILURE,
+            data = HttpStatus.UNAUTHORIZED.reasonPhrase,
+        )
+    }
+
+    @ExceptionHandler(Exception::class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    fun handleException(ex: Exception): ErrorResponse {
+
+        return ErrorResponse(
+            message = ErrorMessage.SERVER_ERROR,
+            code = HttpStatus.INTERNAL_SERVER_ERROR.value(),
+            status = StatusMessage.FAILURE,
+            data = HttpStatus.INTERNAL_SERVER_ERROR.reasonPhrase,
         )
     }
 }
