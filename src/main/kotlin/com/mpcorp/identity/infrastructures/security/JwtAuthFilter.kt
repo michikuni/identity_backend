@@ -1,7 +1,7 @@
 package com.mpcorp.identity.infrastructures.security
 
-import com.mpcorp.identity.infrastructures.security.utils.CustomUserDetailsService
-import com.mpcorp.identity.infrastructures.security.utils.JwtUtils
+import com.mpcorp.identity.infrastructures.security.user_details.CustomUserDetailsService
+import com.mpcorp.identity.common.utils.JwtUtils
 import jakarta.servlet.FilterChain
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse

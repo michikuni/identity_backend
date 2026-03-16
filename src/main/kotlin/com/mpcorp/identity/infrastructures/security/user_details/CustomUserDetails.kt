@@ -1,4 +1,4 @@
-package com.mpcorp.identity.infrastructures.security.utils
+package com.mpcorp.identity.infrastructures.security.user_details
 
 import com.mpcorp.identity.domain.entity.AuthEntity
 import org.springframework.security.core.GrantedAuthority

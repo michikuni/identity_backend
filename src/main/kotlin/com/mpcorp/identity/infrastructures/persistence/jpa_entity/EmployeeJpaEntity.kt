@@ -13,7 +13,7 @@ class EmployeeJpaEntity(
 
     @OneToOne
     @JoinColumn(name = "auth_id", nullable = false)
-    var auth: AuthEntity,
+    var auth: AuthJpaEntity,
 
     @Column(nullable = false)
     var department: String,

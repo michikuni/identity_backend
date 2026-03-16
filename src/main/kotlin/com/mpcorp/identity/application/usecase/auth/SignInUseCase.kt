@@ -1,16 +1,24 @@
 package com.mpcorp.identity.application.usecase.auth
 
 import com.mpcorp.identity.application.dto.SignInCommand
+import com.mpcorp.identity.common.exception.InvalidPasswordException
+import com.mpcorp.identity.common.exception.UserNotFoundException
+import com.mpcorp.identity.common.utils.JwtUtils
 import com.mpcorp.identity.domain.repository.AuthRepository
 import com.mpcorp.identity.presentation.request.SignInRequest
 import org.springframework.stereotype.Service
 
 @Service
 class SignInUseCase (
-    private val authRepository: AuthRepository
+    private val authRepository: AuthRepository,
+    private val jwtUtils: JwtUtils
 ){
-    fun execute(signInCommand: SignInCommand) : Boolean {
-        authRepository.signIn(SignInRequest(username = signInCommand.username, password = signInCommand.password))
-        return true
+    fun execute(signInCommand: SignInCommand) : String {
+        val user = authRepository.findByUsername(signInCommand.username) ?: throw UserNotFoundException()
+        if (user.password != signInCommand.password) {
+            throw InvalidPasswordException()
+        }
+        val token = jwtUtils.generateToken(userId = user.id.toString(), role = user.role.name)
+        return token
     }
 }
