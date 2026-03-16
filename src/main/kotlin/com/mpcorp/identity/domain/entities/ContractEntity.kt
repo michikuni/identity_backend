@@ -1,27 +1,27 @@
-package com.mpcorp.identity.entity
+package com.mpcorp.identity.domain.entities
 
 import jakarta.persistence.*
 import java.sql.Timestamp
 
 @Entity
 @Table(name = "contract")
-data class ContractEntity (
+data class ContractEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null,
 
     @OneToOne
-    @JoinColumn(name = "employee_id", nullable = false)
+    @JoinColumn(name = "employee_id")
     var employee: EmployeeEntity,
 
     @Column(name = "type_contract", nullable = false)
     var typeContract: String,
 
     @Column(name = "start_date", nullable = false)
-    var startDate: String,
+    var startDate: Timestamp,
 
     @Column(name = "end_date", nullable = true)
-    var endDate: String?,
+    var endDate: Timestamp?,
 
     @Column(name = "contract_expire", nullable = true)
     var contractExpire: Timestamp?,
@@ -41,4 +41,4 @@ data class ContractEntity (
     @Column(name = "health_insurance_number", nullable = true, unique = true)
     var healthInsuranceNumber: String?,
 
-)
+    )

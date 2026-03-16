@@ -1,4 +1,4 @@
-package com.mpcorp.identity.entity
+package com.mpcorp.identity.domain.entities
 
 import jakarta.persistence.*
 import java.util.UUID

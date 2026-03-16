@@ -1,7 +1,7 @@
-package com.mpcorp.identity.entity
+package com.mpcorp.identity.domain.entities
 
 import jakarta.persistence.*
-import java.time.Instant
+import java.sql.Timestamp
 
 @Entity
 @Table(name = "employee")
@@ -10,6 +10,10 @@ class EmployeeEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null,
+
+    @OneToOne
+    @JoinColumn(name = "auth_id", nullable = false)
+    var auth: AuthEntity,
 
     @Column(nullable = false)
     var department: String,
@@ -31,10 +35,10 @@ class EmployeeEntity(
     var manager: EmployeeEntity?,
 
     @Column(name = "created_at", nullable = false)
-    var createdAt: Instant,
+    var createdAt: Timestamp,
 
     @Column(name = "updated_at", nullable = false)
-    var updatedAt: Instant,
+    var updatedAt: Timestamp,
 
     @Column(name = "created_by", nullable = false)
     var createdBy: String,

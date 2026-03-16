@@ -1,17 +1,17 @@
-package com.mpcorp.identity.entity
+package com.mpcorp.identity.domain.entities
 
 import jakarta.persistence.*
 import java.sql.Timestamp
 
 @Entity
 @Table(name = "payroll")
-data class PayrollEntity (
+data class PayrollEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null,
 
     @OneToOne
-    @JoinColumn(name = "employee_id", nullable = false)
+    @JoinColumn(name = "employee_id")
     var employee: EmployeeEntity,
 
     @Column(name = "salary_type", nullable = false)

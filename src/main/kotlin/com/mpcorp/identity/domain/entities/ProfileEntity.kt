@@ -1,16 +1,16 @@
-package com.mpcorp.identity.entity
+package com.mpcorp.identity.domain.entities
 
 import jakarta.persistence.*
 
 @Entity
 @Table(name = "profile")
-data class ProfileEntity (
+data class ProfileEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null,
 
     @OneToOne
-    @JoinColumn(name = "employee_id", nullable = false)
+    @JoinColumn(name = "employee_id")
     var employee: EmployeeEntity,
 
     @Column(name = "name", nullable = false)
