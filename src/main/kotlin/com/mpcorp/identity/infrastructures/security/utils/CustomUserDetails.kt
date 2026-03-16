@@ -1,6 +1,6 @@
 package com.mpcorp.identity.infrastructures.security.utils
 
-import com.mpcorp.identity.domain.entities.AuthEntity
+import com.mpcorp.identity.domain.entity.AuthEntity
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
