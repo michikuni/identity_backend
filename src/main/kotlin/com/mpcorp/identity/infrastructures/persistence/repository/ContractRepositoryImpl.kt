@@ -1,6 +1,5 @@
 package com.mpcorp.identity.infrastructures.persistence.repository
 
-import com.mpcorp.identity.common.exception.UserNotFoundException
 import com.mpcorp.identity.domain.entity.ContractEntity
 import com.mpcorp.identity.domain.repository.ContractRepository
 import com.mpcorp.identity.infrastructures.persistence.jpa_repository.ContractJpaRepository
@@ -15,23 +14,23 @@ class ContractRepositoryImpl (
     private val employeeJpaRepository: EmployeeJpaRepository
 ) : ContractRepository {
     override fun createContract(contract: ContractEntity): ContractEntity {
-        val contractJpa = contract.toPersistentEntity()
-        val contractCreated = contractJpaRepository.save(contractJpa)
-        return contractCreated.toDomainEntity()
+        val contractJpaData = contract.toPersistentEntity()
+        val dataSaveContract = contractJpaRepository.save(contractJpaData)
+        return dataSaveContract.toDomainEntity()
     }
 
     override fun findContractById(userId: Long): ContractEntity? {
-        val contract = contractJpaRepository.findContractByEmployeeId(userId) ?: return null
-        return contract.toDomainEntity()
+        val contractJpaData = contractJpaRepository.findContractByEmployeeId(userId) ?: return null
+        return contractJpaData.toDomainEntity()
     }
 
     override fun updateContractByEmployeeId(employeeId: Long, contract: ContractEntity): ContractEntity {
-        val employee = employeeJpaRepository.findById(employeeId).orElseThrow{ RuntimeException("Employee not found") }
-        val contractJpa = contract.toPersistentEntity()
-        contractJpa.employee = employee
-        employee.contract = contractJpa
+        val employeeJpaData = employeeJpaRepository.findById(employeeId).orElseThrow{ RuntimeException("Employee not found") }
+        val dataUpdateContract = contract.toPersistentEntity()
+        dataUpdateContract.employee = employeeJpaData
+        employeeJpaData.contract = dataUpdateContract
 
-        val savedEmployee = employeeJpaRepository.save(employee)
+        val savedEmployee = employeeJpaRepository.save(employeeJpaData)
 
         return savedEmployee.contract!!.toDomainEntity()
     }

@@ -4,8 +4,8 @@ import com.mpcorp.identity.domain.entity.EmployeeEntity
 import java.util.UUID
 
 interface EmployeeRepository {
-    fun createEmployeeById(id: UUID, employee: EmployeeEntity): EmployeeEntity
-    fun findEmployeeById(id: UUID): EmployeeEntity?
-    fun updateEmployeeById(id: UUID, employee: EmployeeEntity): EmployeeEntity
-    fun deleteEmployeeById(id: UUID)
+    fun createEmployee(employee: EmployeeEntity): EmployeeEntity
+    fun findEmployeeByAuthId(id: UUID): EmployeeEntity?
+    fun updateEmployeeByAuthId(id: UUID, employee: EmployeeEntity): EmployeeEntity
+    fun deleteEmployeeByAuthId(id: UUID)
 }
