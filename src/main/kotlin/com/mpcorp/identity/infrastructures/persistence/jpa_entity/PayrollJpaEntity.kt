@@ -15,35 +15,35 @@ data class PayrollJpaEntity(
     var employee: EmployeeJpaEntity,
 
     @Column(name = "salary_type", nullable = false)
-    val salaryType: String,
+    var salaryType: String,
 
     @Column(name = "base_salary", nullable = false)
-    val baseSalary: Double,
+    var baseSalary: Double,
 
     @Column(name = "bonus_amount", nullable = true)
-    val bonusSalary: Double?,
+    var bonusSalary: Double?,
 
     @Column(name = "over_time_rate", nullable = true)
-    val overTimeRate: Double?,
+    var overTimeRate: Double?,
 
     @Column(name = "total_income", nullable = false)
-    val totalIncome: Double,
+    var totalIncome: Double,
 
     @Column(name = "currency", nullable = false)
-    val currency: String,
+    var currency: String,
 
     @Column(name = "payday", nullable = false)
-    val payDay: Timestamp,
+    var payDay: Timestamp,
 
     @Column(name = "bank_account_number", nullable = false)
-    val bankAccountNumber: String,
+    var bankAccountNumber: String,
 
     @Column(name = "bank_account_name", nullable = false)
-    val bankAccountName: String,
+    var bankAccountName: String,
 
     @Column(name = "bank_name", nullable = false)
-    val bankName: String,
+    var bankName: String,
 
     @Column(name = "bank_branch", nullable = true)
-    val bankBranch: String?
+    var bankBranch: String?
 )
