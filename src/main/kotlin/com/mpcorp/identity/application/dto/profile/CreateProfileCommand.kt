@@ -1,7 +1,6 @@
 package com.mpcorp.identity.application.dto.profile
 
 import com.mpcorp.identity.application.dto.employee.UpdateEmployeeCommand
-import com.mpcorp.identity.domain.entity.EmployeeEntity
 
 data class CreateProfileCommand(
     val employee: UpdateEmployeeCommand,

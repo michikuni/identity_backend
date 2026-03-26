@@ -1,34 +1,32 @@
 package com.mpcorp.identity.presentation.response.employee
 
-import com.mpcorp.identity.common.enums.EmployeeRole
+import com.mpcorp.identity.domain.entity.AuthEntity
+import com.mpcorp.identity.presentation.response.contract.ContractResponseData
+import com.mpcorp.identity.presentation.response.payroll.PayrollResponseData
+import com.mpcorp.identity.presentation.response.profile.ProfileResponseData
 import java.sql.Timestamp
-import java.util.UUID
 
-data class AuthDto(
-    val id: UUID?,
-    val email: String,
-    val phone: String,
-    val role: EmployeeRole,
-)
-
-data class EmployeeDto(
-    val id: Long?,
-    val auth: AuthDto,
+data class EmployeeResponseData(
+    val id: Long,
+    val auth: AuthEntity,
     val department: String,
     val position: String,
     val status: String,
     val workingType: String,
     val isActive: Boolean,
-    val managerId: Long?,
+    val manager: EmployeeResponseData?,
     val createdAt: Timestamp,
     val updatedAt: Timestamp,
     val createdBy: String,
     val note: String?,
+    val profile: ProfileResponseData? = null,
+    val contract: ContractResponseData? = null,
+    val payroll: PayrollResponseData? = null
 )
 
 data class EmployeeResponse(
     val status: Int,
     val message: String,
-    val data: EmployeeDto?,
+    val data: EmployeeResponseData?,
 )
 

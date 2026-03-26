@@ -1,9 +1,11 @@
 package com.mpcorp.identity.presentation.response.payroll
 
+import com.mpcorp.identity.presentation.response.employee.EmployeeResponseData
 import java.sql.Timestamp
 
-data class PayrollDto(
-    val id: Long?,
+data class PayrollResponseData(
+    val id: Long,
+    val employee: EmployeeResponseData,
     val salaryType: String,
     val baseSalary: Double,
     val bonusSalary: Double?,
@@ -20,6 +22,6 @@ data class PayrollDto(
 data class PayrollResponse(
     val status: Int,
     val message: String,
-    val data: PayrollDto?,
+    val data: PayrollResponseData?,
 )
 

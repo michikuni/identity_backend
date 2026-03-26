@@ -3,7 +3,7 @@ package com.mpcorp.identity.application.dto.profile
 import com.mpcorp.identity.application.dto.employee.UpdateEmployeeCommand
 
 data class UpdateProfileCommand(
-    val id: Long? = null,
+    val id: Long,
     val employee: UpdateEmployeeCommand,
     val name: String,
     val gender: String,

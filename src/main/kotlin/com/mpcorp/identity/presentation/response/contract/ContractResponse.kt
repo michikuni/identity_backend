@@ -1,9 +1,11 @@
 package com.mpcorp.identity.presentation.response.contract
 
+import com.mpcorp.identity.presentation.response.employee.EmployeeResponseData
 import java.sql.Timestamp
 
-data class ContractDto(
-    val id: Long?,
+data class ContractResponseData(
+    val id: Long,
+    val employee: EmployeeResponseData,
     val typeContract: String,
     val startDate: Timestamp,
     val endDate: Timestamp?,
@@ -18,6 +20,6 @@ data class ContractDto(
 data class ContractResponse(
     val status: Int,
     val message: String,
-    val data: ContractDto?,
+    val data: ContractResponseData?,
 )
 

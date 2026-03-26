@@ -1,7 +1,10 @@
 package com.mpcorp.identity.presentation.response.profile
 
-data class ProfileDto(
-    val id: Long?,
+import com.mpcorp.identity.presentation.response.employee.EmployeeResponseData
+
+data class ProfileResponseData(
+    val id: Long,
+    val employee: EmployeeResponseData,
     val name: String,
     val gender: String,
     val identityType: String,
@@ -26,9 +29,10 @@ data class ProfileDto(
     val expYears: Int,
 )
 
+
 data class ProfileResponse(
     val status: Int,
     val message: String,
-    val data: ProfileDto?,
+    val data: ProfileResponseData?,
 )
 
