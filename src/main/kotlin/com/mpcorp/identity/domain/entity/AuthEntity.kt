@@ -4,9 +4,9 @@ import com.mpcorp.identity.common.enums.EmployeeRole
 import java.util.UUID
 
 data class AuthEntity (
-    var id: UUID? = null,
-    var email: String,
-    var phone: String,
-    var password: String?,
-    var role: EmployeeRole = EmployeeRole.EMPLOYEE,
+    val id: UUID? = null,
+    val email: String,
+    val phone: String,
+    val password: String?,
+    val role: EmployeeRole = EmployeeRole.EMPLOYEE,
 )

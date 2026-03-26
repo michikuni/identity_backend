@@ -1,3 +1,17 @@
 package com.mpcorp.identity.application.dto.contract
 
-data class CreateContractCommand()
+import com.mpcorp.identity.application.dto.employee.UpdateEmployeeCommand
+import java.sql.Timestamp
+
+data class CreateContractCommand (
+    val employee: UpdateEmployeeCommand,
+    val typeContract: String,
+    val startDate: Timestamp,
+    val endDate: Timestamp?,
+    val contractExpire: Timestamp?,
+    val probationStartDate: Timestamp?,
+    val probationEndDate: Timestamp?,
+    val taxCode: String,
+    val socialInsuranceNumber: String?,
+    val healthInsuranceNumber: String?,
+)

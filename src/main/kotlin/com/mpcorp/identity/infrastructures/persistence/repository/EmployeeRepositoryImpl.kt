@@ -5,8 +5,10 @@ import com.mpcorp.identity.domain.repository.EmployeeRepository
 import com.mpcorp.identity.infrastructures.persistence.jpa_repository.EmployeeJpaRepository
 import com.mpcorp.identity.infrastructures.persistence.mapper.toDomainEntity
 import com.mpcorp.identity.infrastructures.persistence.mapper.toPersistentEntity
+import org.springframework.stereotype.Service
 import java.util.UUID
 
+@Service
 class EmployeeRepositoryImpl(
     private val employeeJpaRepository: EmployeeJpaRepository
 ) : EmployeeRepository {

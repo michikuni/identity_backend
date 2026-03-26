@@ -1,4 +1,5 @@
 package com.mpcorp.identity.application.dto.contract
 
-class DeleteContractCommand {
-}
+data class DeleteContractCommand (
+    val employeeId: Long
+)

@@ -15,6 +15,7 @@ fun AuthJpaEntity.toDomainEntity() : AuthEntity {
 
 fun AuthEntity.toPersistentEntity() : AuthJpaEntity {
     return AuthJpaEntity(
+        id = id,
         email = email,
         password = password,
         phone = phone,

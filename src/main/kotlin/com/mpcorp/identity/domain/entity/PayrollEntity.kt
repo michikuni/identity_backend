@@ -3,8 +3,8 @@ package com.mpcorp.identity.domain.entity
 import java.sql.Timestamp
 
 data class PayrollEntity(
-    var id: Long? = null,
-    var employee: EmployeeEntity,
+    val id: Long? = null,
+    val employee: EmployeeEntity,
     val salaryType: String,
     val baseSalary: Double,
     val bonusSalary: Double?,

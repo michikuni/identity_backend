@@ -3,15 +3,15 @@ package com.mpcorp.identity.domain.entity
 import java.sql.Timestamp
 
 data class ContractEntity(
-    var id: Long? = null,
-    var employee: EmployeeEntity,
-    var typeContract: String,
-    var startDate: Timestamp,
-    var endDate: Timestamp?,
-    var contractExpire: Timestamp?,
-    var probationStartDate: Timestamp?,
-    var probationEndDate: Timestamp?,
-    var taxCode: String,
-    var socialInsuranceNumber: String?,
-    var healthInsuranceNumber: String?,
+    val id: Long? = null,
+    val employee: EmployeeEntity,
+    val typeContract: String,
+    val startDate: Timestamp,
+    val endDate: Timestamp?,
+    val contractExpire: Timestamp?,
+    val probationStartDate: Timestamp?,
+    val probationEndDate: Timestamp?,
+    val taxCode: String,
+    val socialInsuranceNumber: String?,
+    val healthInsuranceNumber: String?,
 )

@@ -36,6 +36,50 @@ class GlobalExceptionHandler {
         )
     }
 
+    @ExceptionHandler(EmployeeNotFoundException::class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    fun handleEmployeeNotFound(ex: EmployeeNotFoundException): ErrorResponse {
+        return ErrorResponse(
+            message = ex.message ?: ErrorMessage.EMPLOYEE_NOT_FOUND,
+            code = HttpStatus.NOT_FOUND.value(),
+            status = StatusMessage.FAILURE,
+            data = HttpStatus.NOT_FOUND.reasonPhrase,
+        )
+    }
+
+    @ExceptionHandler(ContractNotFoundException::class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    fun handleContractNotFound(ex: ContractNotFoundException): ErrorResponse {
+        return ErrorResponse(
+            message = ex.message ?: ErrorMessage.CONTRACT_NOT_FOUND,
+            code = HttpStatus.NOT_FOUND.value(),
+            status = StatusMessage.FAILURE,
+            data = HttpStatus.NOT_FOUND.reasonPhrase,
+        )
+    }
+
+    @ExceptionHandler(ProfileNotFoundException::class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    fun handleProfileNotFound(ex: ProfileNotFoundException): ErrorResponse {
+        return ErrorResponse(
+            message = ex.message ?: ErrorMessage.PROFILE_NOT_FOUND,
+            code = HttpStatus.NOT_FOUND.value(),
+            status = StatusMessage.FAILURE,
+            data = HttpStatus.NOT_FOUND.reasonPhrase,
+        )
+    }
+
+    @ExceptionHandler(PayrollNotFoundException::class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    fun handlePayrollNotFound(ex: PayrollNotFoundException): ErrorResponse {
+        return ErrorResponse(
+            message = ex.message ?: ErrorMessage.PAYROLL_NOT_FOUND,
+            code = HttpStatus.NOT_FOUND.value(),
+            status = StatusMessage.FAILURE,
+            data = HttpStatus.NOT_FOUND.reasonPhrase,
+        )
+    }
+
     @ExceptionHandler(Exception::class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     fun handleException(ex: Exception): ErrorResponse {
