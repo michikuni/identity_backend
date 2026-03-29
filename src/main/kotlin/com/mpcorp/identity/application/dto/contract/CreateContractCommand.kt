@@ -4,7 +4,7 @@ import com.mpcorp.identity.application.references.EmployeeRefModel
 import java.sql.Timestamp
 
 data class CreateContractCommand(
-    val employee: EmployeeRefModel,
+    val employee: com.mpcorp.identity.application.references.EmployeeRefModel,
     val typeContract: String,
     val startDate: Timestamp,
     val endDate: Timestamp?,

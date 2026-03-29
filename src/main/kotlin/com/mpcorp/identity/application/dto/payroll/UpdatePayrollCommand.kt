@@ -5,8 +5,8 @@ import com.mpcorp.identity.application.references.PayrollRefModel
 import java.sql.Timestamp
 
 data class UpdatePayrollCommand(
-    val payroll: PayrollRefModel,
-    val employee: EmployeeRefModel,
+    val payroll: com.mpcorp.identity.application.references.PayrollRefModel,
+    val employee: com.mpcorp.identity.application.references.EmployeeRefModel,
     val salaryType: String,
     val baseSalary: Double,
     val bonusSalary: Double?,

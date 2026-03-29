@@ -7,5 +7,5 @@ import org.springframework.boot.runApplication
 class IdentityApplication
 
 fun main(args: Array<String>) {
-	runApplication<IdentityApplication>(*args)
+	runApplication<com.mpcorp.identity.IdentityApplication>(*args)
 }

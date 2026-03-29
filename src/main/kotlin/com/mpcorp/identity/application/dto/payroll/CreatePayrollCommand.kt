@@ -4,7 +4,7 @@ import com.mpcorp.identity.application.references.EmployeeRefModel
 import java.sql.Timestamp
 
 data class CreatePayrollCommand(
-    val employee: EmployeeRefModel,
+    val employee: com.mpcorp.identity.application.references.EmployeeRefModel,
     val salaryType: String,
     val baseSalary: Double,
     val bonusSalary: Double?,

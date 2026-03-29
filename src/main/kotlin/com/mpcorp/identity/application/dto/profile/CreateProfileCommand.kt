@@ -3,7 +3,7 @@ package com.mpcorp.identity.application.dto.profile
 import com.mpcorp.identity.application.references.EmployeeRefModel
 
 data class CreateProfileCommand(
-    val employee: EmployeeRefModel,
+    val employee: com.mpcorp.identity.application.references.EmployeeRefModel,
     val name: String,
     val gender: String,
     val identityType: String,

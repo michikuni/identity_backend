@@ -4,8 +4,8 @@ import com.mpcorp.identity.application.references.EmployeeRefModel
 import com.mpcorp.identity.application.references.IdentifierModel
 
 data class GetProfileResponseCommand(
-    val id: IdentifierModel,
-    val employee: EmployeeRefModel,
+    val id: com.mpcorp.identity.application.references.IdentifierModel,
+    val employee: com.mpcorp.identity.application.references.EmployeeRefModel,
     val name: String,
     val gender: String,
     val identityType: String,

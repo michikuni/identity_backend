@@ -9,18 +9,18 @@ import java.sql.Timestamp
 
 data class GetEmployeeResponseCommand(
     val id: Long,
-    val auth: AuthRefModel,
+    val auth: com.mpcorp.identity.application.references.AuthRefModel,
     val department: String,
     val position: String,
     val status: String,
     val workingType: String,
     val isActive: Boolean,
-    val manager: EmployeeRefModel?,
+    val manager: com.mpcorp.identity.application.references.EmployeeRefModel?,
     val createdAt: Timestamp,
     val updatedAt: Timestamp,
     val createdBy: String,
     val note: String?,
-    val profile: ProfileRefModel? = null,
-    val contract: ContractRefModel? = null,
-    val payroll: PayrollRefModel? = null
+    val profile: com.mpcorp.identity.application.references.ProfileRefModel? = null,
+    val contract: com.mpcorp.identity.application.references.ContractRefModel? = null,
+    val payroll: com.mpcorp.identity.application.references.PayrollRefModel? = null
 )

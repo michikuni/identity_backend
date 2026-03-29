@@ -9,7 +9,7 @@ data class UpdateEmployeeCommand(
     val status: String,
     val workingType: String,
     val isActive: Boolean,
-    val manager: EmployeeRefModel?,
+    val manager: com.mpcorp.identity.application.references.EmployeeRefModel?,
     val updatedAt: Timestamp,
     val note: String?,
 )

@@ -9,7 +9,7 @@ data class CreateEmployeeCommand(
     val status: String,
     val workingType: String,
     val isActive: Boolean,
-    val manager: EmployeeRefModel?,
+    val manager: com.mpcorp.identity.application.references.EmployeeRefModel?,
     val createdAt: Timestamp,
     val updatedAt: Timestamp,
     val createdBy: String,

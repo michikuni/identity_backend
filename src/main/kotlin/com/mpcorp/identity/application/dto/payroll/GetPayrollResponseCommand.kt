@@ -5,8 +5,8 @@ import com.mpcorp.identity.application.references.IdentifierModel
 import java.sql.Timestamp
 
 data class GetPayrollResponseCommand(
-    val id: IdentifierModel,
-    val employee: EmployeeRefModel,
+    val id: com.mpcorp.identity.application.references.IdentifierModel,
+    val employee: com.mpcorp.identity.application.references.EmployeeRefModel,
     val salaryType: String,
     val baseSalary: Double,
     val bonusSalary: Double?,

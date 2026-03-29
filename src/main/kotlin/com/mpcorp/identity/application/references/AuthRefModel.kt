@@ -8,5 +8,5 @@ data class AuthRefModel (
     val email: String,
     val phone: String,
     val password: String?,
-    val role: EmployeeRole,
+    val role: com.mpcorp.identity.common.enums.EmployeeRole,
 )

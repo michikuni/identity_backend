@@ -5,8 +5,8 @@ import com.mpcorp.identity.application.references.IdentifierModel
 import java.sql.Timestamp
 
 data class GetContractResponseCommand(
-    val id: IdentifierModel,
-    val employee: EmployeeRefModel,
+    val id: com.mpcorp.identity.application.references.IdentifierModel,
+    val employee: com.mpcorp.identity.application.references.EmployeeRefModel,
     val typeContract: String,
     val startDate: Timestamp,
     val endDate: Timestamp?,

@@ -4,8 +4,8 @@ import com.mpcorp.identity.application.references.EmployeeRefModel
 import com.mpcorp.identity.application.references.ProfileRefModel
 
 data class UpdateProfileCommand(
-    val profile: ProfileRefModel,
-    val employee: EmployeeRefModel,
+    val profile: com.mpcorp.identity.application.references.ProfileRefModel,
+    val employee: com.mpcorp.identity.application.references.EmployeeRefModel,
     val name: String,
     val gender: String,
     val identityType: String,
