@@ -1,5 +1,7 @@
 package com.mpcorp.identity.application.dto.contract
 
-data class DeleteContractCommand (
-    val employeeId: Long
+import com.mpcorp.identity.application.references.EmployeeRefModel
+
+data class DeleteContractCommand(
+    val employee: EmployeeRefModel,
 )

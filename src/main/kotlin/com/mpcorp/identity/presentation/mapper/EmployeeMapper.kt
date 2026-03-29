@@ -1,13 +1,16 @@
 package com.mpcorp.identity.presentation.mapper
 
-import com.mpcorp.identity.domain.entity.EmployeeEntity
-import com.mpcorp.identity.presentation.response.employee.AuthDto
-import com.mpcorp.identity.presentation.response.employee.EmployeeDto
+import com.mpcorp.identity.application.dto.employee.GetEmployeeResponseCommand
+import com.mpcorp.identity.application.references.IdentifierModel
+import com.mpcorp.identity.presentation.model.EmployeeRefPayload
+import com.mpcorp.identity.presentation.model.IdentifierPayload
+import com.mpcorp.identity.presentation.response.employee.EmployeeAuthResponse
+import com.mpcorp.identity.presentation.response.employee.EmployeeResponseData
 
-fun EmployeeEntity.toDto(): EmployeeDto = EmployeeDto(
-    id = id,
-    auth = AuthDto(
-        id = auth.id,
+fun GetEmployeeResponseCommand.toDto(): EmployeeResponseData = EmployeeResponseData(
+    id = id.toString().toIdentifierPayload(),
+    auth = EmployeeAuthResponse(
+        id = auth.id?.toString()?.toIdentifierPayload(),
         email = auth.email,
         phone = auth.phone,
         role = auth.role,
@@ -17,9 +20,16 @@ fun EmployeeEntity.toDto(): EmployeeDto = EmployeeDto(
     status = status,
     workingType = workingType,
     isActive = isActive,
-    managerId = manager?.id,
+    manager = manager?.let {
+        EmployeeRefPayload(
+            id = it.id.toPayload(),
+            authId = it.authId.toPayload(),
+        )
+    },
     createdAt = createdAt,
     updatedAt = updatedAt,
     createdBy = createdBy,
     note = note,
 )
+
+private fun IdentifierModel?.toPayload() = this?.let { IdentifierPayload(value = it.value) }

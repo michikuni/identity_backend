@@ -3,20 +3,21 @@ package com.mpcorp.identity.presentation.api
 import com.mpcorp.identity.presentation.request.payroll.CreatePayrollRequest
 import com.mpcorp.identity.presentation.request.payroll.UpdatePayrollRequest
 import com.mpcorp.identity.presentation.response.payroll.PayrollResponse
+import jakarta.servlet.http.HttpServletRequest
 import org.springframework.web.bind.annotation.*
 
 @RequestMapping("/api/v1/payroll")
 interface PayrollApi {
     @PostMapping
-    fun create(@RequestBody request: CreatePayrollRequest): PayrollResponse
+    fun create(httpRequest: HttpServletRequest, @RequestBody request: CreatePayrollRequest): PayrollResponse
 
     @PutMapping
-    fun update(@RequestBody request: UpdatePayrollRequest): PayrollResponse
+    fun update(httpRequest: HttpServletRequest, @RequestBody request: UpdatePayrollRequest): PayrollResponse
 
     @GetMapping
-    fun get(): PayrollResponse
+    fun get(httpRequest: HttpServletRequest): PayrollResponse
 
     @DeleteMapping
-    fun delete(): PayrollResponse
+    fun delete(httpRequest: HttpServletRequest): PayrollResponse
 }
 

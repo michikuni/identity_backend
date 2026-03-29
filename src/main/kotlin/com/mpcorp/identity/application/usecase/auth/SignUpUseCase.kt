@@ -1,6 +1,7 @@
 package com.mpcorp.identity.application.usecase.auth
 
 import com.mpcorp.identity.application.dto.auth.SignUpCommand
+import com.mpcorp.identity.common.enums.EmployeeRole
 import com.mpcorp.identity.common.exception.UserAlreadyExistingException
 import com.mpcorp.identity.common.utils.JwtUtils
 import com.mpcorp.identity.domain.entity.AuthEntity
@@ -19,7 +20,14 @@ class SignUpUseCase (
         if (phone != null || email != null) {
             throw UserAlreadyExistingException()
         }
-        val userCreated = authRepository.create(AuthEntity(phone = signUpCommand.phone, email = signUpCommand.email, password = signUpCommand.password))
+        val userCreated = authRepository.create(
+            AuthEntity(
+                phone = signUpCommand.phone,
+                email = signUpCommand.email,
+                password = signUpCommand.password,
+                role = EmployeeRole.EMPLOYEE,
+            )
+        )
         val token = jwtUtils.generateToken(userId = userCreated.id.toString(), role = userCreated.role.name)
         return token
     }

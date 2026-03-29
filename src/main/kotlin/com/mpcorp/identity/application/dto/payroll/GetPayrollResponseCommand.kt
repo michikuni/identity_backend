@@ -1,11 +1,12 @@
 package com.mpcorp.identity.application.dto.payroll
 
-import com.mpcorp.identity.application.dto.employee.UpdateEmployeeCommand
+import com.mpcorp.identity.application.references.EmployeeRefModel
+import com.mpcorp.identity.application.references.IdentifierModel
 import java.sql.Timestamp
 
 data class GetPayrollResponseCommand(
-    val id: Long,
-    val employee: UpdateEmployeeCommand,
+    val id: IdentifierModel,
+    val employee: EmployeeRefModel,
     val salaryType: String,
     val baseSalary: Double,
     val bonusSalary: Double?,
@@ -16,5 +17,5 @@ data class GetPayrollResponseCommand(
     val bankAccountNumber: String,
     val bankAccountName: String,
     val bankName: String,
-    val bankBranch: String?
+    val bankBranch: String?,
 )

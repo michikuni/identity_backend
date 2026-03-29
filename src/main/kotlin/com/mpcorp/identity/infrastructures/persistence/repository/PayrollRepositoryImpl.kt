@@ -1,20 +1,40 @@
 package com.mpcorp.identity.infrastructures.persistence.repository
 
+import com.mpcorp.identity.common.exception.EmployeeNotFoundException
+import com.mpcorp.identity.common.exception.PayrollNotFoundException
 import com.mpcorp.identity.domain.entity.PayrollEntity
 import com.mpcorp.identity.domain.repository.PayrollRepository
+import com.mpcorp.identity.infrastructures.persistence.jpa_entity.PayrollJpaEntity
+import com.mpcorp.identity.infrastructures.persistence.jpa_repository.EmployeeJpaRepository
 import com.mpcorp.identity.infrastructures.persistence.jpa_repository.PayrollJpaRepository
 import com.mpcorp.identity.infrastructures.persistence.mapper.toDomainEntity
-import com.mpcorp.identity.infrastructures.persistence.mapper.toPersistentEntity
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 
 @Service
 class PayrollRepositoryImpl(
-    private val payrollJpaRepository: PayrollJpaRepository
+    private val payrollJpaRepository: PayrollJpaRepository,
+    private val employeeJpaRepository: EmployeeJpaRepository,
 ) : PayrollRepository {
+    @Transactional
     override fun createPayrollById(
         payroll: PayrollEntity
     ): PayrollEntity {
-        val payrollJpaData = payroll.toPersistentEntity()
+        val employeeId = payroll.employee.id ?: throw EmployeeNotFoundException()
+        val payrollJpaData = PayrollJpaEntity(
+            employee = employeeJpaRepository.findById(employeeId).orElseThrow(::EmployeeNotFoundException),
+            salaryType = payroll.salaryType,
+            baseSalary = payroll.baseSalary,
+            bonusSalary = payroll.bonusSalary,
+            overTimeRate = payroll.overTimeRate,
+            totalIncome = payroll.totalIncome,
+            currency = payroll.currency,
+            payDay = payroll.payDay,
+            bankAccountNumber = payroll.bankAccountNumber,
+            bankAccountName = payroll.bankAccountName,
+            bankName = payroll.bankName,
+            bankBranch = payroll.bankBranch,
+        )
         val dataSavePayroll = payrollJpaRepository.save(payrollJpaData)
         return dataSavePayroll.toDomainEntity()
     }
@@ -28,9 +48,10 @@ class PayrollRepositoryImpl(
         payroll: PayrollEntity
     ): PayrollEntity {
         val existingPayroll = payrollJpaRepository.findPayrollByEmployeeId(payroll.employee.id)
-            ?: throw RuntimeException("Payroll not found")
+            ?: throw PayrollNotFoundException()
         existingPayroll.apply {
-            employee = payroll.employee.toPersistentEntity()
+            val employeeId = payroll.employee.id ?: throw EmployeeNotFoundException()
+            employee = employeeJpaRepository.findById(employeeId).orElseThrow(::EmployeeNotFoundException)
             salaryType = payroll.salaryType
             baseSalary = payroll.baseSalary
             bonusSalary = payroll.bonusSalary
@@ -47,6 +68,7 @@ class PayrollRepositoryImpl(
         return payrollJpaRepository.save(existingPayroll).toDomainEntity()
     }
 
+    @Transactional
     override fun deletePayrollById(userId: Long) {
         payrollJpaRepository.deletePayrollByEmployeeId(userId)
     }

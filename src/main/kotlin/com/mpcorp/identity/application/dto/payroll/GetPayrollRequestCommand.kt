@@ -1,6 +1,7 @@
 package com.mpcorp.identity.application.dto.payroll
 
-data class GetPayrollRequestCommand(
-    val employeeId: Long
-)
+import com.mpcorp.identity.application.references.EmployeeRefModel
 
+data class GetPayrollRequestCommand(
+    val employee: EmployeeRefModel,
+)

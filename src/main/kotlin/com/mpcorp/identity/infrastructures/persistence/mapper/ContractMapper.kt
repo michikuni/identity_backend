@@ -3,7 +3,7 @@ package com.mpcorp.identity.infrastructures.persistence.mapper
 import com.mpcorp.identity.domain.entity.ContractEntity
 import com.mpcorp.identity.infrastructures.persistence.jpa_entity.ContractJpaEntity
 
-fun ContractJpaEntity.toDomainEntity() : ContractEntity {
+fun ContractJpaEntity.toDomainEntity(): ContractEntity {
     return ContractEntity(
         id = id,
         contractExpire = contractExpire,
@@ -19,8 +19,9 @@ fun ContractJpaEntity.toDomainEntity() : ContractEntity {
     )
 }
 
-fun ContractEntity.toPersistentEntity() : ContractJpaEntity {
+fun ContractEntity.toPersistentEntity(): ContractJpaEntity {
     return ContractJpaEntity(
+        id = id,
         contractExpire = contractExpire,
         employee = employee.toPersistentEntity(),
         endDate = endDate,

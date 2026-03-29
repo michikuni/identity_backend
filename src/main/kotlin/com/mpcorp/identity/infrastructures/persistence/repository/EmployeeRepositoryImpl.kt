@@ -1,21 +1,40 @@
 package com.mpcorp.identity.infrastructures.persistence.repository
 
+import com.mpcorp.identity.common.exception.EmployeeNotFoundException
+import com.mpcorp.identity.common.exception.UserNotFoundException
 import com.mpcorp.identity.domain.entity.EmployeeEntity
 import com.mpcorp.identity.domain.repository.EmployeeRepository
+import com.mpcorp.identity.infrastructures.persistence.jpa_entity.EmployeeJpaEntity
+import com.mpcorp.identity.infrastructures.persistence.jpa_repository.AuthJpaRepository
 import com.mpcorp.identity.infrastructures.persistence.jpa_repository.EmployeeJpaRepository
 import com.mpcorp.identity.infrastructures.persistence.mapper.toDomainEntity
-import com.mpcorp.identity.infrastructures.persistence.mapper.toPersistentEntity
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 import java.util.UUID
 
 @Service
 class EmployeeRepositoryImpl(
-    private val employeeJpaRepository: EmployeeJpaRepository
+    private val employeeJpaRepository: EmployeeJpaRepository,
+    private val authJpaRepository: AuthJpaRepository,
 ) : EmployeeRepository {
+    @Transactional
     override fun createEmployee(
         employee: EmployeeEntity
     ): EmployeeEntity {
-        val employeeJpaData = employee.toPersistentEntity()
+        val authId = employee.auth.id ?: throw UserNotFoundException()
+        val employeeJpaData = EmployeeJpaEntity(
+            auth = authJpaRepository.findById(authId).orElseThrow(::UserNotFoundException),
+            department = employee.department,
+            position = employee.position,
+            status = employee.status,
+            workingType = employee.workingType,
+            isActive = employee.isActive,
+            manager = employee.manager?.id?.let { employeeJpaRepository.findById(it).orElse(null) },
+            createdAt = employee.createdAt,
+            updatedAt = employee.updatedAt,
+            createdBy = employee.createdBy,
+            note = employee.note,
+        )
         val dataSaveEmployee = employeeJpaRepository.save(employeeJpaData)
         return dataSaveEmployee.toDomainEntity()
     }
@@ -25,23 +44,23 @@ class EmployeeRepositoryImpl(
         return employeeJpaData.toDomainEntity()
     }
 
+    override fun findEmployeeById(id: Long): EmployeeEntity? {
+        val employeeJpaData = employeeJpaRepository.findById(id).orElse(null) ?: return null
+        return employeeJpaData.toDomainEntity()
+    }
+
     override fun updateEmployeeByAuthId(
-        id: UUID,
         employee: EmployeeEntity
     ): EmployeeEntity {
-        val existingEmployee = employeeJpaRepository.findEmployeeByAuthId(id) ?: throw RuntimeException("Employee not found")
+        val authId = employee.auth.id ?: throw UserNotFoundException()
+        val existingEmployee = employeeJpaRepository.findEmployeeByAuthId(authId) ?: throw EmployeeNotFoundException()
         existingEmployee.apply {
-            contract = employee.contract?.toPersistentEntity()
-            profile = employee.profile?.toPersistentEntity()
-            payroll = employee.payroll?.toPersistentEntity()
-            manager = employee.manager?.toPersistentEntity()
-            createdBy = employee.createdBy
+            manager = employee.manager?.id?.let { employeeJpaRepository.findById(it).orElse(null) }
             department = employee.department
             position = employee.position
             status = employee.status
             workingType = employee.workingType
             isActive = employee.isActive
-            createdAt = employee.createdAt
             updatedAt = employee.updatedAt
             note = employee.note
         }
@@ -49,6 +68,7 @@ class EmployeeRepositoryImpl(
         return employeeJpaRepository.save(existingEmployee).toDomainEntity()
     }
 
+    @Transactional
     override fun deleteEmployeeByAuthId(id: UUID) {
         employeeJpaRepository.deleteEmployeeByAuthId(id)
     }

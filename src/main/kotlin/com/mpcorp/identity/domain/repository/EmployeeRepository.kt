@@ -5,7 +5,8 @@ import java.util.UUID
 
 interface EmployeeRepository {
     fun createEmployee(employee: EmployeeEntity): EmployeeEntity
+    fun findEmployeeById(id: Long): EmployeeEntity?
     fun findEmployeeByAuthId(id: UUID): EmployeeEntity?
-    fun updateEmployeeByAuthId(id: UUID, employee: EmployeeEntity): EmployeeEntity
+    fun updateEmployeeByAuthId(employee: EmployeeEntity): EmployeeEntity
     fun deleteEmployeeByAuthId(id: UUID)
 }

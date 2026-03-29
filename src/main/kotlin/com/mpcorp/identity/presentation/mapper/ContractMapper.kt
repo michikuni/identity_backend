@@ -1,10 +1,12 @@
 package com.mpcorp.identity.presentation.mapper
 
-import com.mpcorp.identity.domain.entity.ContractEntity
-import com.mpcorp.identity.presentation.response.contract.ContractDto
+import com.mpcorp.identity.application.dto.contract.GetContractResponseCommand
+import com.mpcorp.identity.presentation.model.EmployeeRefPayload
+import com.mpcorp.identity.presentation.response.contract.ContractResponseData
 
-fun ContractEntity.toDto(): ContractDto = ContractDto(
-    id = id,
+fun GetContractResponseCommand.toDto(): ContractResponseData = ContractResponseData(
+    id = id.value.toIdentifierPayload(),
+    employee = EmployeeRefPayload(id = employee.id?.value?.toIdentifierPayload()),
     typeContract = typeContract,
     startDate = startDate,
     endDate = endDate,

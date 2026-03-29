@@ -8,5 +8,5 @@ data class AuthEntity (
     val email: String,
     val phone: String,
     val password: String?,
-    val role: EmployeeRole = EmployeeRole.EMPLOYEE,
+    val role: EmployeeRole,
 )

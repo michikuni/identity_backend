@@ -1,6 +1,7 @@
 package com.mpcorp.identity.application.dto.profile
 
-data class DeleteProfileCommand(
-    val employeeId: Long
-)
+import com.mpcorp.identity.application.references.EmployeeRefModel
 
+data class DeleteProfileCommand(
+    val employee: EmployeeRefModel,
+)

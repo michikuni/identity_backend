@@ -1,9 +1,9 @@
 package com.mpcorp.identity.application.dto.profile
 
-import com.mpcorp.identity.application.dto.employee.UpdateEmployeeCommand
+import com.mpcorp.identity.application.references.EmployeeRefModel
 
 data class CreateProfileCommand(
-    val employee: UpdateEmployeeCommand,
+    val employee: EmployeeRefModel,
     val name: String,
     val gender: String,
     val identityType: String,
@@ -25,6 +25,5 @@ data class CreateProfileCommand(
     val major: String,
     val certificate: List<String>? = null,
     val skillSet: List<String> = listOf(),
-    val expYears: Int
+    val expYears: Int,
 )
-

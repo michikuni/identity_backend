@@ -1,6 +1,7 @@
 package com.mpcorp.identity.application.dto.profile
 
-data class GetProfileRequestCommand(
-    val employeeId: Long
-)
+import com.mpcorp.identity.application.references.EmployeeRefModel
 
+data class GetProfileRequestCommand(
+    val employee: EmployeeRefModel,
+)

@@ -3,7 +3,7 @@ package com.mpcorp.identity.infrastructures.persistence.mapper
 import com.mpcorp.identity.domain.entity.ProfileEntity
 import com.mpcorp.identity.infrastructures.persistence.jpa_entity.ProfileJpaEntity
 
-fun ProfileJpaEntity.toDomainEntity() : ProfileEntity {
+fun ProfileJpaEntity.toDomainEntity(): ProfileEntity {
     return ProfileEntity(
         id = id,
         employee = employee.toDomainEntity(),
@@ -32,8 +32,9 @@ fun ProfileJpaEntity.toDomainEntity() : ProfileEntity {
     )
 }
 
-fun ProfileEntity.toPersistentEntity() : ProfileJpaEntity {
+fun ProfileEntity.toPersistentEntity(): ProfileJpaEntity {
     return ProfileJpaEntity(
+        id = id,
         employee = employee.toPersistentEntity(),
         name = name,
         email = email,

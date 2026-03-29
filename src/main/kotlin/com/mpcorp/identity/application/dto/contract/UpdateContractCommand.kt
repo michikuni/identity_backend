@@ -1,11 +1,12 @@
 package com.mpcorp.identity.application.dto.contract
 
-import com.mpcorp.identity.application.dto.employee.UpdateEmployeeCommand
+import com.mpcorp.identity.application.references.ContractRefModel
+import com.mpcorp.identity.application.references.EmployeeRefModel
 import java.sql.Timestamp
 
-data class UpdateContractCommand (
-    val id: Long,
-    val employee: UpdateEmployeeCommand,
+data class UpdateContractCommand(
+    val contract: ContractRefModel,
+    val employee: EmployeeRefModel,
     val typeContract: String,
     val startDate: Timestamp,
     val endDate: Timestamp?,

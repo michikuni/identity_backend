@@ -1,11 +1,12 @@
 package com.mpcorp.identity.presentation.response.contract
 
-import com.mpcorp.identity.presentation.response.employee.EmployeeResponseData
+import com.mpcorp.identity.presentation.model.EmployeeRefPayload
+import com.mpcorp.identity.presentation.model.IdentifierPayload
 import java.sql.Timestamp
 
 data class ContractResponseData(
-    val id: Long,
-    val employee: EmployeeResponseData,
+    val id: IdentifierPayload?,
+    val employee: EmployeeRefPayload,
     val typeContract: String,
     val startDate: Timestamp,
     val endDate: Timestamp?,
@@ -22,4 +23,3 @@ data class ContractResponse(
     val message: String,
     val data: ContractResponseData?,
 )
-

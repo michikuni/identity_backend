@@ -1,10 +1,8 @@
 package com.mpcorp.identity.presentation.request.contract
 
-import com.mpcorp.identity.presentation.request.employee.UpdateEmployeeRequest
 import java.sql.Timestamp
 
 data class CreateContractRequest(
-    val employee: UpdateEmployeeRequest,
     val typeContract: String,
     val startDate: Timestamp,
     val endDate: Timestamp?,
@@ -15,4 +13,3 @@ data class CreateContractRequest(
     val socialInsuranceNumber: String?,
     val healthInsuranceNumber: String?,
 )
-

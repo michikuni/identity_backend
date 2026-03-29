@@ -1,10 +1,17 @@
 package com.mpcorp.identity.presentation.mapper
 
-import com.mpcorp.identity.domain.entity.ProfileEntity
-import com.mpcorp.identity.presentation.response.profile.ProfileDto
+import com.mpcorp.identity.application.dto.profile.GetProfileResponseCommand
+import com.mpcorp.identity.application.references.IdentifierModel
+import com.mpcorp.identity.presentation.model.EmployeeRefPayload
+import com.mpcorp.identity.presentation.model.IdentifierPayload
+import com.mpcorp.identity.presentation.response.profile.ProfileResponseData
 
-fun ProfileEntity.toDto(): ProfileDto = ProfileDto(
-    id = id,
+fun GetProfileResponseCommand.toDto(): ProfileResponseData = ProfileResponseData(
+    id = IdentifierPayload(id.value),
+    employee = EmployeeRefPayload(
+        id = employee.id.toPayload(),
+        authId = employee.authId.toPayload(),
+    ),
     name = name,
     gender = gender,
     identityType = identityType,
@@ -28,3 +35,5 @@ fun ProfileEntity.toDto(): ProfileDto = ProfileDto(
     skillSet = skillSet,
     expYears = expYears,
 )
+
+private fun IdentifierModel?.toPayload() = this?.let { IdentifierPayload(value = it.value) }

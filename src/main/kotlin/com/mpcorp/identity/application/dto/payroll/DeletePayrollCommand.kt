@@ -1,6 +1,7 @@
 package com.mpcorp.identity.application.dto.payroll
 
-data class DeletePayrollCommand(
-    val employeeId: Long
-)
+import com.mpcorp.identity.application.references.EmployeeRefModel
 
+data class DeletePayrollCommand(
+    val employee: EmployeeRefModel,
+)

@@ -1,10 +1,8 @@
 package com.mpcorp.identity.presentation.request.payroll
 
-import com.mpcorp.identity.presentation.request.employee.UpdateEmployeeRequest
 import java.sql.Timestamp
 
 data class CreatePayrollRequest(
-    val employee: UpdateEmployeeRequest,
     val salaryType: String,
     val baseSalary: Double,
     val bonusSalary: Double?,
@@ -17,4 +15,3 @@ data class CreatePayrollRequest(
     val bankName: String,
     val bankBranch: String?,
 )
-

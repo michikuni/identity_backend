@@ -1,9 +1,6 @@
 package com.mpcorp.identity.presentation.request.profile
 
-import com.mpcorp.identity.presentation.request.employee.UpdateEmployeeRequest
-
 data class CreateProfileRequest(
-    val employee: UpdateEmployeeRequest,
     val name: String,
     val gender: String,
     val identityType: String,
@@ -27,4 +24,3 @@ data class CreateProfileRequest(
     val skillSet: List<String>,
     val expYears: Int,
 )
-

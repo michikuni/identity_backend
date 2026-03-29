@@ -1,10 +1,17 @@
 package com.mpcorp.identity.presentation.mapper
 
-import com.mpcorp.identity.domain.entity.PayrollEntity
-import com.mpcorp.identity.presentation.response.payroll.PayrollDto
+import com.mpcorp.identity.application.dto.payroll.GetPayrollResponseCommand
+import com.mpcorp.identity.application.references.IdentifierModel
+import com.mpcorp.identity.presentation.model.EmployeeRefPayload
+import com.mpcorp.identity.presentation.model.IdentifierPayload
+import com.mpcorp.identity.presentation.response.payroll.PayrollResponseData
 
-fun PayrollEntity.toDto(): PayrollDto = PayrollDto(
-    id = id,
+fun GetPayrollResponseCommand.toDto(): PayrollResponseData = PayrollResponseData(
+    id = IdentifierPayload(id.value),
+    employee = EmployeeRefPayload(
+        id = employee.id.toPayload(),
+        authId = employee.authId.toPayload(),
+    ),
     salaryType = salaryType,
     baseSalary = baseSalary,
     bonusSalary = bonusSalary,
@@ -17,3 +24,5 @@ fun PayrollEntity.toDto(): PayrollDto = PayrollDto(
     bankName = bankName,
     bankBranch = bankBranch,
 )
+
+private fun IdentifierModel?.toPayload() = this?.let { IdentifierPayload(value = it.value) }

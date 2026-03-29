@@ -1,10 +1,11 @@
 package com.mpcorp.identity.application.dto.profile
 
-import com.mpcorp.identity.application.dto.employee.UpdateEmployeeCommand
+import com.mpcorp.identity.application.references.EmployeeRefModel
+import com.mpcorp.identity.application.references.IdentifierModel
 
 data class GetProfileResponseCommand(
-    val id: Long,
-    val employee: UpdateEmployeeCommand,
+    val id: IdentifierModel,
+    val employee: EmployeeRefModel,
     val name: String,
     val gender: String,
     val identityType: String,
@@ -26,5 +27,5 @@ data class GetProfileResponseCommand(
     val major: String,
     val certificate: List<String>? = null,
     val skillSet: List<String> = listOf(),
-    val expYears: Int
+    val expYears: Int,
 )

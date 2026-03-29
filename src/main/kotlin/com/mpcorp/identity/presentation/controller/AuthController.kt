@@ -6,7 +6,6 @@ import com.mpcorp.identity.application.usecase.auth.SignInUseCase
 import com.mpcorp.identity.application.usecase.auth.SignUpUseCase
 import com.mpcorp.identity.common.constant.ErrorCodes
 import com.mpcorp.identity.common.constant.StatusMessage
-import com.mpcorp.identity.domain.repository.AuthRepository
 import com.mpcorp.identity.presentation.api.AuthApi
 import com.mpcorp.identity.presentation.request.auth.SignInRequest
 import com.mpcorp.identity.presentation.request.auth.SignUpRequest

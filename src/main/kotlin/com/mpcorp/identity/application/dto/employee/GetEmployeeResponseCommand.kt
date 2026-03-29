@@ -1,29 +1,26 @@
 package com.mpcorp.identity.application.dto.employee
 
-import com.mpcorp.identity.application.dto.contract.UpdateContractCommand
-import com.mpcorp.identity.application.dto.payroll.UpdatePayrollCommand
-import com.mpcorp.identity.application.dto.profile.UpdateProfileCommand
-import com.mpcorp.identity.domain.entity.AuthEntity
-import com.mpcorp.identity.domain.entity.ContractEntity
-import com.mpcorp.identity.domain.entity.EmployeeEntity
-import com.mpcorp.identity.domain.entity.PayrollEntity
-import com.mpcorp.identity.domain.entity.ProfileEntity
+import com.mpcorp.identity.application.references.AuthRefModel
+import com.mpcorp.identity.application.references.ContractRefModel
+import com.mpcorp.identity.application.references.EmployeeRefModel
+import com.mpcorp.identity.application.references.PayrollRefModel
+import com.mpcorp.identity.application.references.ProfileRefModel
 import java.sql.Timestamp
 
 data class GetEmployeeResponseCommand(
     val id: Long,
-    val auth: AuthEntity,
+    val auth: AuthRefModel,
     val department: String,
     val position: String,
     val status: String,
     val workingType: String,
     val isActive: Boolean,
-    val manager: UpdateEmployeeCommand?,
+    val manager: EmployeeRefModel?,
     val createdAt: Timestamp,
     val updatedAt: Timestamp,
     val createdBy: String,
     val note: String?,
-    val profile: UpdateProfileCommand? = null,
-    val contract: UpdateContractCommand? = null,
-    val payroll: UpdatePayrollCommand? = null
+    val profile: ProfileRefModel? = null,
+    val contract: ContractRefModel? = null,
+    val payroll: PayrollRefModel? = null
 )

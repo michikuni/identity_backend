@@ -4,37 +4,37 @@ import com.mpcorp.identity.application.dto.profile.CreateProfileCommand
 import com.mpcorp.identity.application.dto.profile.DeleteProfileCommand
 import com.mpcorp.identity.application.dto.profile.GetProfileRequestCommand
 import com.mpcorp.identity.application.dto.profile.UpdateProfileCommand
+import com.mpcorp.identity.application.usecase.employee.ResolveCurrentEmployeeRefUseCase
 import com.mpcorp.identity.application.usecase.profile.CreateProfileUseCase
 import com.mpcorp.identity.application.usecase.profile.DeleteProfileUseCase
 import com.mpcorp.identity.application.usecase.profile.GetProfileUseCase
 import com.mpcorp.identity.application.usecase.profile.UpdateProfileUseCase
 import com.mpcorp.identity.common.constant.ErrorCodes
 import com.mpcorp.identity.common.constant.StatusMessage
-import com.mpcorp.identity.common.exception.EmployeeNotFoundException
 import com.mpcorp.identity.common.exception.ProfileNotFoundException
-import com.mpcorp.identity.domain.repository.EmployeeRepository
-import com.mpcorp.identity.infrastructures.security.user_details.CustomUserDetails
 import com.mpcorp.identity.presentation.api.ProfileApi
 import com.mpcorp.identity.presentation.mapper.toDto
+import com.mpcorp.identity.presentation.mapper.toModel
 import com.mpcorp.identity.presentation.request.profile.CreateProfileRequest
 import com.mpcorp.identity.presentation.request.profile.UpdateProfileRequest
 import com.mpcorp.identity.presentation.response.profile.ProfileResponse
-import org.springframework.security.core.context.SecurityContextHolder
+import com.mpcorp.identity.presentation.security.BearerAuthIdResolver
+import jakarta.servlet.http.HttpServletRequest
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
 class ProfileController(
-    private val employeeRepository: EmployeeRepository,
+    private val bearerAuthIdResolver: BearerAuthIdResolver,
+    private val resolveCurrentEmployeeRefUseCase: ResolveCurrentEmployeeRefUseCase,
     private val createProfileUseCase: CreateProfileUseCase,
     private val updateProfileUseCase: UpdateProfileUseCase,
     private val getProfileUseCase: GetProfileUseCase,
     private val deleteProfileUseCase: DeleteProfileUseCase,
 ) : ProfileApi {
-    override fun create(request: CreateProfileRequest): ProfileResponse {
-        val authId = currentAuthId()
+    override fun create(httpRequest: HttpServletRequest, request: CreateProfileRequest): ProfileResponse {
         val profile = createProfileUseCase.execute(
-            authId = authId,
             command = CreateProfileCommand(
+                employee = currentEmployeeRef(httpRequest),
                 name = request.name,
                 gender = request.gender,
                 identityType = request.identityType,
@@ -67,12 +67,11 @@ class ProfileController(
         )
     }
 
-    override fun update(request: UpdateProfileRequest): ProfileResponse {
-        val authId = currentAuthId()
+    override fun update(httpRequest: HttpServletRequest, request: UpdateProfileRequest): ProfileResponse {
         val profile = updateProfileUseCase.execute(
-            authId = authId,
             command = UpdateProfileCommand(
-                id = request.id,
+                profile = request.profile.toModel(),
+                employee = currentEmployeeRef(httpRequest),
                 name = request.name,
                 gender = request.gender,
                 identityType = request.identityType,
@@ -105,9 +104,9 @@ class ProfileController(
         )
     }
 
-    override fun get(): ProfileResponse {
-        val employeeId = currentEmployeeId()
-        val profile = getProfileUseCase.execute(GetProfileRequestCommand(employeeId = employeeId)) ?: throw ProfileNotFoundException()
+    override fun get(httpRequest: HttpServletRequest): ProfileResponse {
+        val profile = getProfileUseCase.execute(GetProfileRequestCommand(employee = currentEmployeeRef(httpRequest)))
+            ?: throw ProfileNotFoundException()
 
         return ProfileResponse(
             status = ErrorCodes.SUCCESS,
@@ -116,9 +115,8 @@ class ProfileController(
         )
     }
 
-    override fun delete(): ProfileResponse {
-        val employeeId = currentEmployeeId()
-        deleteProfileUseCase.execute(DeleteProfileCommand(employeeId = employeeId))
+    override fun delete(httpRequest: HttpServletRequest): ProfileResponse {
+        deleteProfileUseCase.execute(DeleteProfileCommand(employee = currentEmployeeRef(httpRequest)))
 
         return ProfileResponse(
             status = ErrorCodes.DELETE_SUCCESS,
@@ -127,14 +125,6 @@ class ProfileController(
         )
     }
 
-    private fun currentAuthId() =
-        (SecurityContextHolder.getContext().authentication?.principal as? CustomUserDetails)?.getId()
-            ?: throw EmployeeNotFoundException()
-
-    private fun currentEmployeeId(): Long {
-        val authId = currentAuthId()
-        val employee = employeeRepository.findEmployeeByAuthId(authId) ?: throw EmployeeNotFoundException()
-        return employee.id ?: throw EmployeeNotFoundException()
-    }
+    private fun currentEmployeeRef(httpRequest: HttpServletRequest) =
+        resolveCurrentEmployeeRefUseCase.execute(bearerAuthIdResolver.resolveAuthId(httpRequest))
 }
-
