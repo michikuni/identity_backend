@@ -1,0 +1,41 @@
+spring:
+  application:
+    name: fabric-spring-backend
+  # Exclude auto-configs not needed by the Fabric Gateway service
+  # (no database, no Spring Security JWT — pure blockchain API)
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+      - org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration
+      - org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
+      - org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration
+
+server:
+  port: 8080
+
+# Hyperledger Fabric connection settings
+fabric:
+  msp-id: Org1MSP
+  channel-name: mychannel
+  chaincode-name: identity-ledger
+  peer:
+    endpoint: localhost:7051
+    # Absolute path in WSL — adjust if your home dir is different
+    tls-cert-path: /home/phuongdang/identity-fabric/fabric-network/organizations/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt
+  gateway:
+    cert-path: /home/phuongdang/identity-fabric/fabric-network/organizations/peerOrganizations/org1.example.com/users/User1@org1.example.com/msp/signcerts/User1@org1.example.com-cert.pem
+    key-path: /home/phuongdang/identity-fabric/fabric-network/organizations/peerOrganizations/org1.example.com/users/User1@org1.example.com/msp/keystore/
+
+# Swagger UI
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    operationsSorter: method
+  api-docs:
+    path: /api-docs
+
+logging:
+  level:
+    org.fabric: DEBUG
+    org.hyperledger: INFO
+    com.mpcorp: DEBUG

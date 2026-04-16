@@ -7,12 +7,14 @@ import com.mpcorp.identity.application.support.resolveEmployee
 import com.mpcorp.identity.domain.entity.PayrollEntity
 import com.mpcorp.identity.domain.repository.EmployeeRepository
 import com.mpcorp.identity.domain.repository.PayrollRepository
+import com.mpcorp.identity.infrastructures.fabric.FabricLedgerBridge
 import org.springframework.stereotype.Service
 
 @Service
 class CreatePayrollUseCase(
     private val payrollRepository: PayrollRepository,
     private val employeeRepository: EmployeeRepository,
+    private val fabricBridge: FabricLedgerBridge,
 ) {
     fun execute(command: CreatePayrollCommand): GetPayrollResponseCommand {
         val employee = command.employee.resolveEmployee(employeeRepository)
@@ -30,6 +32,8 @@ class CreatePayrollUseCase(
             bankName = command.bankName,
             bankBranch = command.bankBranch,
         )
-        return payrollRepository.createPayrollById(payroll).toGetPayrollResponseCommand()
+        val saved = payrollRepository.createPayrollById(payroll)
+        fabricBridge.upsertPayrollRecord(saved, action = "CREATE")
+        return saved.toGetPayrollResponseCommand()
     }
 }
